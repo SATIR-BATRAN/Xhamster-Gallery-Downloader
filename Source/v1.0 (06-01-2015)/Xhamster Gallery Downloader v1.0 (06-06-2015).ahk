@@ -8,6 +8,7 @@
  * 
  *   HOME: http://xhamster.com/user/SATIR-BATRAN
  *   BLOG: http://xhamster.com/user/SATIR-BATRAN/blog/1.html
+ *	 SOURCE CODE & UPDATES: https://github.com/SATIR-BATRAN/Xhamster-Gallery-Downloader
  *	 
  */
  
@@ -20,6 +21,8 @@ a3=by SATIR-BATRAN
 lg:=strlen(a1)
 about:= StrSet(a1, lg, 2 ) . "`n" . StrSet(a2, lg+14, 2 )  . "`n" . StrSet(a3, lg+14, 2 )
 
+IfNotExist, icon.ico
+  FileInstall, icon.ico, icon.ico
 menu, tray, icon, icon.ico
 menu, tray, tip, %about%
 ;=============================
@@ -79,7 +82,7 @@ Gui,Font,normal
 Gui,Font,Bold s7,verdana
 Gui,Add,Text,x10 yp+177,Enjoy it :
 
-
+Gui,Font, s6 normal cblack w1,verdana
 Gui, Add, Edit,xp yp+15 hwndEC1 R1 w320 vMyEdit
 
 gui, font, s7 w700, Verdana  
@@ -334,10 +337,7 @@ PICS_DWN:
 		ElapsedTime := (A_TickCount - StartTime)/1000
 		rem:=round((LineCount-a_index)*ElapsedTime)
 		formated_time:=SecToHHMMSS(rem)
-		Timp_ramas_secunde:=round((LineCount-a_index)*ElapsedTime)
-		Timp_ramas_minute:=round(((LineCount-a_index)*ElapsedTime)/60)
 		Timp_ramas_minute := SubStr("0000" . Timp_ramas_minute,-1) 
-		Timp_ramas_ore:=round(((LineCount-a_index)*ElapsedTime)/3600)
 		FormatTime, ora_cand_E_gata, % DateAdd( A_Now, Timp_ramas_minute, "m" ), H:mm	
 		msg=%a_index% / %linecount%`nRemaining : %formated_time%`nEnding at : %ora_cand_E_gata%
 		CoordMode, ToolTip
@@ -484,29 +484,14 @@ Sourcecodepage:
 	Run, https://github.com/SATIR-BATRAN/Xhamster-Gallery-Downloader
 return
 ;=============================
-/*
+
+
 WM_MOUSEMOVE(wParam,lParam)
 {
-  If( A_Gui <> 1 ) 
+	Global hCurs
+	MouseGetPos,,,,ctrl
+
+	If ctrl in Static12,Static14,Static16,Button1
+	DllCall("SetCursor","UInt",hCurs)
 	Return
-
-  Static hCurs = 0
-  If( hCurs = 0 )
-	hCurs:=DllCall("LoadCursor","UInt",NULL,"Int",32649,"UInt") ;IDC_HAND
-  
-  ; Only change controls with Button or Url in their variable.
-  If( InStr( A_GuiControl, "Button" ) ) or ( InStr( A_GuiControl, "Url" ) )
-    DllCall("SetCursor","UInt",hCurs)
-  Return
-}
-*/
-
-WM_MOUSEMOVE(wParam,lParam)
-{
-Global hCurs
-MouseGetPos,,,,ctrl
-;Only change over certain controls, use Windows Spy to find them.
-If ctrl in Static12,Static14,Static16,Button1
-DllCall("SetCursor","UInt",hCurs)
-Return
 }
