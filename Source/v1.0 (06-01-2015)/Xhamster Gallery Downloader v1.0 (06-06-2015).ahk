@@ -36,7 +36,7 @@ file_6:=a_temp . "\XHM_tmp_dwn_6.txt"
 Menu, Tray, NoStandard 
 Menu, Tray, Add , H&ome page, Homepage 
 Menu, Tray, Add , B&log page, Blogpage 
-Menu, Tray, Add , Source code & updates page, Sourcecodepage
+Menu, Tray, Add , Source code && Updates page, Sourcecodepage
 menu, tray, add  
 Menu, Tray, Add , E&xit, ButtonExit
 
@@ -72,7 +72,7 @@ The connection can be stopped by pressing F3.
 It will close the program too.
 )
 
-gui, font, s7 w1 normal, Verdana  ; Set 12-point Verdana.
+gui, font, s7 w1 normal, Verdana  
 Gui, Add, Text,x10 yp+15,%help%
 
 Gui,Font,normal
@@ -82,21 +82,35 @@ Gui,Add,Text,x10 yp+177,Enjoy it :
 
 Gui, Add, Edit,xp yp+15 hwndEC1 R1 w320 vMyEdit
 
-gui, font, s7 w700, Verdana  ; Set 12-point Verdana.
+gui, font, s7 w700, Verdana  
 Gui, Add, Button, default x80 h20 w200 gDownload, &Download gallery
 
-gui, font, s7 W1  ITALIC, Verdana  ; Set 12-point Verdana.
-Gui, Add, Text,x65,%about%
+gui, font, s7 W1  ITALIC, Verdana  
+Gui, Add, Text,x65,
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 Gui,Font, s7,verdana
-Gui,Add,Text,x30 yp+1,This program is freeware and it is made by SATIR-BATRAN.
+Gui,Add,Text,x10 yp,This program is freeware and it is made by SATIR-BATRAN.
 Gui,Add,Text,xp yp+12,For more information, please stop by at :
-Gui,Font,s7 CBlue Underline italic, verdana
-Gui,Add,Text,xp yp+13 gHomepage,http://xhamster.com/user/SATIR-BATRAN
-Gui,Add,Text,xp yp+12 gBlogpage,http://xhamster.com/user/SATIR-BATRAN/blog/1.html
-Gui,Add,Text,xp yp+12 gSourcecodepage,http://source codes
+
+Gui,Font, s6 normal cblack bold,verdana
+Gui,Add,Text,x100 yp+12 ,Source code && Updates: 
+
+Gui,Font,s7 CBlue Underline  w1 italic, verdana
+Gui,Add,Text,x10 yp+11 gSourcecodepage, https://github.com/SATIR-BATRAN/Xhamster-Gallery-Downloader
+
+Gui,Font, s6 normal cblack bold,verdana
+Gui,Add,Text,xp yp+15 ,Home :
+Gui,Font,s7 CBlue Underline w1 italic, verdana
+Gui,Add,Text,x55 yp-2 gHomepage, http://xhamster.com/user/SATIR-BATRAN
+
+Gui,Font, s6 normal cblack bold,verdana
+Gui,Add,Text,x10 yp+12 ,Blog   : 
+Gui,Font,s7 CBlue Underline w1 italic, verdana
+Gui,Add,Text,x55 yp-2 gBlogpage,http://xhamster.com/user/SATIR-BATRAN/blog/1.html
+
+
 
 
 Gui,   -Caption +sysmenu -resize +0xC00000 +e0x1000
@@ -456,16 +470,18 @@ StrSet( Str, Width, Align=0, PadChar=" " ) {      ; Align  => Left=0, Right=1, C
 Return Align=2 ? SubStr( S Str S PadChar,1,Width ) :  Align=1 ?  S Str : Str S
 } 
 
+Gui,Add,Text,xp yp+13 gHomepage,http://xhamster.com/user/SATIR-BATRAN
+Gui,Add,Text,xp yp+12 gBlogpage,http://xhamster.com/user/SATIR-BATRAN/blog/1.html
 Homepage:
-
+	Run, http://xhamster.com/user/SATIR-BATRAN
 return
 
 Blogpage:
-
+	Run, http://xhamster.com/user/SATIR-BATRAN/blog/1.html
 return
 
 Sourcecodepage:
-
+	Run, https://github.com/SATIR-BATRAN/Xhamster-Gallery-Downloader
 return
 ;=============================
 /*
@@ -490,7 +506,7 @@ WM_MOUSEMOVE(wParam,lParam)
 Global hCurs
 MouseGetPos,,,,ctrl
 ;Only change over certain controls, use Windows Spy to find them.
-If ctrl in Static8,Static12,Static13,Button1
+If ctrl in Static12,Static14,Static16,Button1
 DllCall("SetCursor","UInt",hCurs)
 Return
 }
